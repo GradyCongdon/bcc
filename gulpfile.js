@@ -10,6 +10,7 @@ var webserver = require("gulp-webserver");
 var browserify = require("browserify");
 var source = require('vinyl-source-stream');
 var buffer = require('vinyl-buffer');
+var es = require('event-stream');
 
 var paths = {
   scripts: 'src/*.js',
@@ -31,20 +32,27 @@ gulp.task('clean', function() {
 });
 
 gulp.task('js', function(){
+  var files = [
+    'src/app.js',
+    'src/bc.js',
+  ];
 
-  var b = browserify({
-    entries: 'src/app.js',
-  jsdebug: true
+  var tasks = files.map(function(entry) {
+    var b = browserify({
+     entries: [entry],
+     jsdebug: true
+    });
+    return b
+      .transform("babelify", {presets: ['latest']})
+      .on('error', handleError)
+      .bundle()
+      .on('error', handleError)
+      .pipe(source(entry))
+      .pipe(buffer())
+      .pipe(rename({extname: '.js', dirname: ''}))
+      .pipe(gulp.dest('./dist'));
   });
-  return b
-    .transform("babelify", {presets: ['latest']})
-    .on('error', handleError)
-    .bundle()
-    .on('error', handleError)
-    .pipe(source('app.js'))
-    .pipe(buffer())
-    .pipe(rename({extname: '.js'}))
-    .pipe(gulp.dest('dist'));
+  return es.merge.apply(null, tasks);
 });
 
 gulp.task('sass', function() {

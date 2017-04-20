@@ -4,6 +4,7 @@
   "description": "Control bandcamp from beyond",
   "main": "app.js",
   "dependencies": {
+    "event-stream": "^3.3.4",
     "gulp": "^3.9.1",
     "gulp-sass": "^3.1.0",
     "gulp-webserver": "^0.9.1"
