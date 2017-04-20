@@ -1,16 +1,16 @@
 class Player {
-  constructor(controller) {
-    this.controller = controller;
+  constructor() {
+    this.buttons = {};
     this.buttons.play = di('play');
     this.buttons.shuffle = di('shuffle');
   }
   play() {
     // UI stuff
-    this.controller.play;
+    // chrome.
   }
   shuffle() {
     // UI stuff
-    this.controller.shuffle;
+    // this.controller.shuffle;
   }
 }
 

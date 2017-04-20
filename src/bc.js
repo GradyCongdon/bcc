@@ -1,1 +1,2 @@
-console.log('bc');
+import Bandcamp from'./Bandcamp.js';
+

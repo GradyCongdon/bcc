@@ -33,7 +33,7 @@ gulp.task('clean', function() {
 
 gulp.task('js', function(){
   var files = [
-    'src/app.js',
+    'src/popup.js',
     'src/bc.js',
   ];
 
