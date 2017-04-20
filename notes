@@ -1,0 +1,26 @@
+playing
+  global_foot2_bundle.min
+    4649
+      fun startListening
+    5277
+      this._comm.startListening()
+    4952
+      this._player.play()
+    4897
+      this.play()
+          playpause ()
+    6344
+      this._playlist.playpause(track_id)
+        ! other goodies
+
+
+  Cookie com(unnication) chanel playlist started listening
+
+
+shuffle only works with visible ui elements
+
+#pagedata.dataset.blob
+  ?? identities.is_admin
+      part of dom, try writing to it before js uses??
+  signup_querystrings
+    keys = track/album id
