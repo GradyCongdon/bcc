@@ -1,9 +1,23 @@
+$active-green: lightgreen;
+
+html {
+  font-family: Arial;
+}
+
 .player {
   font-size: 20pt;
 }
 
 .button {
   cursor: pointer;
+  &:hover {
+    background: lightblue;
+  }
+
+}
+
+.active {
+  background: $active-green;
 }
 
 .play {

@@ -1,7 +1,16 @@
-class Bandcamp {
+export default class Bandcamp {
   constructor() {
-    this.dataset = JSON.parse(document.getElementById('pagedata').dataset.blob);
-    this.playButtons = document.getElementsByClassName('item_link_play_widget');
+    try {
+      this.dataset = JSON.parse(document.getElementById('pagedata').dataset.blob);
+    } catch (e) {
+      console.error('no page-dataset');
+    }
+    try {
+      this.playButtons = document.getElementsByClassName('item_link_play_widget');
+    } catch (e) {
+      console.error('no play buttons');
+    }
+
   }
 
   shuffle() {
