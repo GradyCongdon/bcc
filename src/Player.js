@@ -1,31 +1,47 @@
-import Chrome from './Chrome.js';
-// const chrome = require('./Chrome.js');
+import { di } from './util.js';
 
-export default class Player {
-  constructor() {
-    // this.controller = chrome;
-    this.controller = new Chrome();
-    console.debug(this.controller);
-    this.buttons = {};
-    this.buttons.play = di('player-play');
-    this.buttons.shuffle = di('player-shuffle');
-    this.action = {}
-    this.action.play = this.controller.play;
-    console.log(this.action);
-    console.log(typeof this.action.play);
-    this.action.play();
+class Player {
+  constructor(actor) {
+    this.buttons = {
+      play: di('player-play'),
+      pause: di('player-pause'),
+      next: di('player-next'),
+      previous: di('player-previous'),
+      shuffle: di('player-shuffle'),
+      autoplay: di('player-autoplay'),
+    };
+    this.toggles = {
+      autoplay: true,
+      shuffle: false,
+    };
+    this.actor = actor;
   }
   play() {
-    this.action.play();
+    const action = () => console.log('play');
+    this.actor.action(action);
+  }
+  pause() {
+    const action = () => console.log('pause');
+    this.actor.action(action);
+  }
+  next() {
+    const action = () => console.log('next');
+    this.actor.action(action);
+  }
+  previous() {
+    const action = () => console.log('previous');
+    this.actor.action(action);
   }
   shuffle() {
-    this.contoller.shuffle()
-    this.buttons.shuffle.classList.add('active');
+    const action = () => console.log('shuffle');
+    this.actor.action(action);
+    this.toggle.shuffle = !this.toggle.shuffle;
   }
-    
+  autoplay() {
+    const action = () => console.log('autoplay');
+    this.actor.action(action);
+    this.toggle.autoplay = !this.toggle.autoplay;
+  }
 }
 
-function di(id) {
-  return document.getElementById(id);
-}
-
+export default Player;

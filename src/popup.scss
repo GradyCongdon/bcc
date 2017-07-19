@@ -16,6 +16,14 @@ html {
 
 }
 
+.toggle {
+  cursor: pointer;
+  &:hover {
+    background: lightblue;
+  }
+
+}
+
 .active {
   background: $active-green;
 }

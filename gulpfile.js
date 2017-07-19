@@ -96,5 +96,6 @@ gulp.task('serve', function() {
       livereload: true,
       fallback: 'index.html',
       host: '0.0.0.0',
+      port: 8001,
     }));
 });
