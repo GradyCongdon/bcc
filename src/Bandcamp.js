@@ -26,3 +26,11 @@ export default class Bandcamp {
 function rand(min, max) {
   return Math.floor(Math.random() * (max - min)) + min;
 }
+
+export const bandcampPage = {
+  query: {
+    url: 'https://*.bandcamp.com/*'
+  },
+  script: 'bc.js',
+  site: 'https://bandcamp.com',
+}

@@ -1,5 +1,6 @@
 import Chrome from './Chrome.js';
 import Player from './Player.js';
+import { bandcampPage } from './Bandcamp';
 
 function addClickListeners(nodes, instance) {
   Object.keys(nodes).forEach(key => {
@@ -12,7 +13,7 @@ function addClickListeners(nodes, instance) {
   });
 }
 
-const actor = new Chrome({});
+console.log(bandcampPage);
+const actor = new Chrome(bandcampPage);
 const player = new Player(actor);
 addClickListeners(player.buttons, player);
-

@@ -1,34 +1,31 @@
-/*
-const bandcamp = {
-  query: {
-    url: 'https://*.bandcamp.com/*'
-  },
-  script: 'bs.js',
-}
-*/
-
-class Chrome {
+export default class Chrome {
   constructor(page) {
     this.page = page;
-  }
-  action(callback) {
-    //doAction
-    callback();
-    return true;
+    this.chrome = chrome;
   }
 
-  /* 
-   * Actual extension call
-  action(callback) {
-    chrome.windows.getCurrent(function (currentWindow) {
-      chrome.tabs.query(this.page.query, (tabs) => {
-        chrome.tabs.executeScript(tabs[0].id, {file: this.page.script, allFrames: true}, callback);
-      });
-    });
+  openSite() {
+    chrome.tabs.create({ url: this.page.site });
   }
-  */
+
+  action(callback) {
+    const query = this.page.query;
+    const script = this.page.script;
+    try {
+      chrome.windows.getCurrent((currentWindow) => {
+        chrome.tabs.query(query, (tabs) => {
+          if (!tabs.length) {
+            this.openSite();
+          }
+          console.log(chrome.tabs.connect(tabs[0].id, {}));
+          chrome.tabs.sendMessage(tabs[0].id, 'play');
+        });
+      });
+    } catch (e) {
+      console.error(e);
+    }
+  }
+
+  
 
 }
-
-// const chrome  = window.chrome;
-export default Chrome;

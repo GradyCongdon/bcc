@@ -33,14 +33,14 @@ class Player {
     this.actor.action(action);
   }
   shuffle() {
-    const action = () => console.log('shuffle');
+    this.toggles.shuffle = !this.toggles.shuffle;
+    const action = () => console.log(`shuffle: ${this.toggles.shuffle}`);
     this.actor.action(action);
-    this.toggle.shuffle = !this.toggle.shuffle;
   }
   autoplay() {
-    const action = () => console.log('autoplay');
+    this.toggles.autoplay = !this.toggles.autoplay;
+    const action = () => console.log(`autoplay: ${this.toggles.autoplay}`);
     this.actor.action(action);
-    this.toggle.autoplay = !this.toggle.autoplay;
   }
 }
 
