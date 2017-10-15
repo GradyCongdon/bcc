@@ -16,7 +16,8 @@
   "content_scripts": [
     {
       "matches": ["https://bandcamp.com/*"],
-      "js": ["bc.js"]
+      "js": ["bc.js"],
+      "css": ["bcc.css"]
     }
   ]
 }

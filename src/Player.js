@@ -1,7 +1,16 @@
-import { di } from './util.js';
+import { di } from './util';
 
 class Player {
   constructor(actor) {
+    this.actor = actor;
+    this.state = {
+      play: false,
+      pause: false,
+      next: false,
+      previous: false,
+      autoplay: false,
+      shuffle: false,
+    };
     this.buttons = {
       play: di('player-play'),
       pause: di('player-pause'),
@@ -10,37 +19,32 @@ class Player {
       shuffle: di('player-shuffle'),
       autoplay: di('player-autoplay'),
     };
-    this.toggles = {
-      autoplay: true,
-      shuffle: false,
-    };
-    this.actor = actor;
   }
   play() {
-    const action = () => console.log('play');
-    this.actor.action(action);
+    this.state.play = true;
+    this.actor.send(this.state);
   }
   pause() {
-    const action = () => console.log('pause');
-    this.actor.action(action);
+    this.state.pause = true;
+    this.actor.send(this.state);
   }
   next() {
-    const action = () => console.log('next');
-    this.actor.action(action);
+    console.debug('sending next')
+    this.state.next = true;
+    this.actor.send(this.state);
   }
   previous() {
-    const action = () => console.log('previous');
-    this.actor.action(action);
+    this.state.previous = true;
+    this.actor.send(this.state);
+    this.state.previous = false;
   }
   shuffle() {
-    this.toggles.shuffle = !this.toggles.shuffle;
-    const action = () => console.log(`shuffle: ${this.toggles.shuffle}`);
-    this.actor.action(action);
+    this.state.shuffle = !this.state.shuffle;
+    this.actor.send(this.state);
   }
   autoplay() {
-    this.toggles.autoplay = !this.toggles.autoplay;
-    const action = () => console.log(`autoplay: ${this.toggles.autoplay}`);
-    this.actor.action(action);
+    this.state.autoplay = !this.state.autoplay;
+    this.actor.send(this.state);
   }
 }
 

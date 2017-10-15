@@ -8,7 +8,7 @@ export default class Chrome {
     chrome.tabs.create({ url: this.page.site });
   }
 
-  action(callback) {
+  send(message) {
     const query = this.page.query;
     const script = this.page.script;
     try {
@@ -17,15 +17,18 @@ export default class Chrome {
           if (!tabs.length) {
             this.openSite();
           }
-          console.log(chrome.tabs.connect(tabs[0].id, {}));
-          chrome.tabs.sendMessage(tabs[0].id, 'play');
+          const tabId = tabs[0].id;
+          this.sendMessage(tabId, message);
+          //console.log(chrome.tabs.connect(tabId, {}));
         });
       });
     } catch (e) {
       console.error(e);
     }
   }
-
-  
+  sendMessage(id, message) {
+    console.debug(message);
+    chrome.tabs.sendMessage(id, message);
+  }
 
 }

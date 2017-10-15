@@ -1,0 +1,11 @@
+.bcc-ui-pane {
+  position: fixed;
+  top:0;
+  left:0;
+  width: 200px;
+  height: 400px;
+  background: purple;
+  color: white;
+  z-index: 100000;
+  word-wrap: break-word;
+}
