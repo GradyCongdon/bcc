@@ -36,7 +36,6 @@ class Player {
   previous() {
     this.state.previous = true;
     this.actor.send(this.state);
-    this.state.previous = false;
   }
   shuffle() {
     this.state.shuffle = !this.state.shuffle;

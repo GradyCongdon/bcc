@@ -8,8 +8,8 @@ const port = chrome.runtime.connect();
 // chrome.runtime.onConnect.addListener(port => {});
 
 chrome.runtime.onMessage.addListener(message => {
-  ui.debugState(message);
-  bc.onMessage(message);
+  const state = bc.onMessage(message);
+  ui.debugState(state);
 });
 
 console.log("we're in");
