@@ -8,22 +8,32 @@ export default class Bandcamp {
     this.collection = this.getCollection();
     this.actions = ['play', 'pause', 'next', 'previous'];
     this.toggles = ['autoplay', 'shuffle'];
-    this.state = {};
-    this.defaults = {};
+    this.state = {
+      lastPlayed: 0,
+    }
     console.log('construciton finsihed');
   }
   getTrackIndex(track = null) {
     if (!track) {
-      track = this.getPlayingTrack();
+      track = this.getPlayingTrack() || this.getLastPlayedTrack();
     }
     let index =  this.collection.indexOf(track);
     return index;
   }
-  getPlayingTrack(prop = null) {
-    const track = this.collection.filter(item => Array.from(item.classList).includes('playing'));
+  getPlayingTrack() {
+    const track = this.filterCollectionbyClass('playing');
     return track[0];
   }
-
+  getLastPlayedTrack() {
+    const lastPlayed =  this.state.lastPlayed;
+    return this.collection[lastPlayed];
+  }
+  filterCollectionbyClass(className = null) {
+    if (!className) {
+      return this.collection;
+    }
+    return this.collection.filter(item => Array.from(item.classList).includes(className));
+  }
   getPlayButtons() {
     try {
       return Array.from(document.getElementsByClassName('item_link_play_widget'));
@@ -58,7 +68,7 @@ export default class Bandcamp {
     return true;
   }
   addDefaultState(obj) {
-    return Object.assign({}, this.defaults, obj);
+    return Object.assign({}, this.state, obj);
   }
   setState(obj) {
     const valid = this.validateState(obj);
@@ -96,23 +106,27 @@ export default class Bandcamp {
     console.debug('bc play');
     let index = this.indexCheck(this.getTrackIndex());
     this.playButtons[index].click();
+    this.state.lastPlayed = index;
   }
   pause() {
     console.debug('bc pause');
     let index = this.indexCheck(this.getTrackIndex());
     this.playButtons[index].click();
+    this.state.lastPlayed = index;
   }
   next() {
     console.debug('bc next');
     let index = this.getTrackIndex();
     index = index + 1;
     this.playButtons[index].click();
+    this.state.lastPlayed = index;
   }
   previous() {
     console.debug('bc prev');
     let index = this.getTrackIndex();
     index = index - 1;
     this.playButtons[index].click();
+    this.state.lastPlayed = index;
   }
 }
   
