@@ -14,7 +14,18 @@ chrome.runtime.onMessage.addListener(message => {
 
 console.log("we're in");
 
+window.onload = () => {
+  const buttons = bc.getPlayButtons();
+  Array.from(buttons).forEach((button, index) => {
+    const updatePlayingIndex = () => {
+      console.log(index);
+      bc.state.lastPlayed = index;
+      ui.debugState(bc.state);
+    }
+    button.addEventListener('click', updatePlayingIndex);
+  });
+  console.debug(buttons.length);
+};
 
-
-
-
+console.debug(bc.getPlayButtons().length);
+console.debug('bc.js done');
