@@ -22,28 +22,34 @@ class Player {
   }
   play() {
     this.state.play = true;
-    this.actor.send(this.state);
+    const response = this.actor.send(this.state);
+    console.debug('actor response');
+    console.debug(response);
+    response.then(state => {
+      console.debug('promise state');
+      this.state = state
+    });
   }
   pause() {
     this.state.pause = true;
-    this.actor.send(this.state);
+    const response = this.actor.send(this.state);
   }
   next() {
     console.debug('sending next')
     this.state.next = true;
-    this.actor.send(this.state);
+    const response = this.actor.send(this.state);
   }
   previous() {
     this.state.previous = true;
-    this.actor.send(this.state);
+    const response = this.actor.send(this.state);
   }
   shuffle() {
     this.state.shuffle = !this.state.shuffle;
-    this.actor.send(this.state);
+    const response = this.actor.send(this.state);
   }
   autoplay() {
     this.state.autoplay = !this.state.autoplay;
-    this.actor.send(this.state);
+    const response = this.actor.send(this.state);
   }
 }
 

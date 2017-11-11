@@ -43,7 +43,14 @@ gulp.task('js', function(){
      jsdebug: true
     });
     return b
-      .transform("babelify", {presets: ['latest']})
+      .transform("babelify", {
+        presets: ['latest'],
+        plugins: [
+          'babel-polyfill',
+          'babel-plugin-transform-runtime',
+          'babel-plugin-transform-regenerator',
+        ],
+      })
       .on('error', handleError)
       .bundle()
       .on('error', handleError)

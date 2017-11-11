@@ -7,9 +7,13 @@ const port = chrome.runtime.connect();
 
 // chrome.runtime.onConnect.addListener(port => {});
 
-chrome.runtime.onMessage.addListener(message => {
+chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
   const state = bc.onMessage(message);
   ui.debugState(state);
+  console.log('bc onMessage return state');
+  console.log(state);
+  sendResponse(state);
+  return state;
 });
 
 console.log("we're in");

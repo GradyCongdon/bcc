@@ -10,8 +10,14 @@ export default class Bandcamp {
     this.toggles = ['autoplay', 'shuffle'];
     this.state = {
       lastPlayed: 0,
+      play: false,
+      pause: false,
+      next: false,
+      previous: false,
+      autoplay: false,
+      shuffle: false,
     }
-    console.log('construciton finsihed');
+    console.debug('construciton finsihed');
   }
   getTrackIndex(track = null) {
     if (!track) {
@@ -76,10 +82,10 @@ export default class Bandcamp {
       throw new Error('invalid bc state');
     }
     this.state = this.addDefaultState(obj);
-    this.callActions();
+    return this.state;
   }
   callActions() {
-    const actions = this.getActions(this.state);
+    const actions = this.getActions();
     actions.forEach(action =>  {
       try {
         this[action]();
@@ -87,9 +93,13 @@ export default class Bandcamp {
         console.error(`no method ${action} on bandcamp class`);
       }
     });
+    return this.state;
   }
   onMessage(message) {
     this.setState(message);
+    this.callActions();
+    console.debug('bc onMessage final state');
+    console.debug(this.state);
     return this.state;
   }
   shuffle() {
@@ -107,12 +117,14 @@ export default class Bandcamp {
     let index = this.indexCheck(this.getTrackIndex());
     this.playButtons[index].click();
     this.state.lastPlayed = index;
+    this.state.play = false
   }
   pause() {
     console.debug('bc pause');
     let index = this.indexCheck(this.getTrackIndex());
     this.playButtons[index].click();
     this.state.lastPlayed = index;
+    this.state.pause = false
   }
   next() {
     console.debug('bc next');
@@ -120,6 +132,7 @@ export default class Bandcamp {
     index = index + 1;
     this.playButtons[index].click();
     this.state.lastPlayed = index;
+    this.state.next = false
   }
   previous() {
     console.debug('bc prev');
@@ -127,6 +140,7 @@ export default class Bandcamp {
     index = index - 1;
     this.playButtons[index].click();
     this.state.lastPlayed = index;
+    this.state.previous = false
   }
 }
   
