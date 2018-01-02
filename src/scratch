@@ -1,0 +1,74 @@
+{
+  toggles: {
+    shuffle: false,
+    autoplay: false,
+  }
+  play: false,
+  lastAction: STRING,
+  track: {
+    name
+    id
+    length
+    currentTime
+    artist
+    album
+    liked
+  }
+
+  send state, rectify state differences, return state or error
+
+  actions
+  play
+  stop / pause
+  next
+  prev
+  -seek
+  -like
+  
+  toggles
+  shuffle
+  autoplay
+  -continue
+
+
+  issues
+  unit testing
+  mocking classes
+  state passing
+  chrome messaging
+  debugging
+  promises
+  async await
+  webpack
+  ui
+  bandcamp dom
+  bandcamp js bugs
+
+  super basic
+  both sides independent state
+  no ui
+  work on bandcamp side 1st then implement player & chrome classes?
+  just play / pause next
+  no last action, all current state only
+
+  dom buttons -> array of tracks
+  state = index of track
+  play = click index button
+  pause = click index button
+  next = clikc next index
+  prev = clikc prev index
+
+  
+
+
+  blog about issues
+    ie run into issues that would be solved by testing: tally and record them so at project end can assess if speing time to setup would have been overall beneficial
+      can use pomodoro to track time spend on bugs of different type vs setting up new / old helper libraries / frameworks 
+
+
+
+
+
+
+
+

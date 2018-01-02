@@ -1,0 +1,77 @@
+
+switching bcc original gulp to webpack would require 2 entrypoints, scss loader? & time 
+  gulp output file diffult to debug tho & less useful
+
+
+write 2 files
+  popup
+    player & chrome
+  bandcamp
+    bandcamp & contet injection script
+
+  vanilla js only
+  debuggable?
+    extension has been troublesome anyway
+  better start for debugging seperate sections wihotut ext
+
+or 
+
+setup webpack
+  would get babel
+  tougher startup but 
+  bundled file output useful
+  webpack useful
+  scss might require extra loader
+    css as backup ok
+  may run into tones of issues / perf issues with extensions
+
+
+
+rewriting player / receiver class too many times
+  should have the same state but reciever has onMessage that does stuff?
+  bandcamp class should just implement actoin / toggle to interact with bc dom
+  player class should just interact with ui buttons 
+  messenger / state classes? 
+  
+  playerUI - state - chrome - state - bandcampUI? - bandcamp
+  or
+  plyaer ui - state - chrome - banccamp 
+    all state lives in player?
+      bandcamp side changes would not propgate back 
+  but state should be identical escept when changing
+  each side will have more popular commands but should all commands be avaiablej?
+    bad commadns: 
+      player set track title
+      player doesnt need to know all tracks in array
+      bandcamp doesnt technicallt need to know shuffle / autoplay state?
+  send subset of state and add extra on either side?
+  skip track things? just play puase next?
+    
+
+  player state - action / toggles
+  track state - track names
+    both? - current track
+
+  toggle vs set
+    toggle can be ambiguous on outcome state
+    set requires 3 values , set, toggle-to-set, state-of-toggle
+    sending entire state easier but need to diff? or have way to reconcile 
+      master vs slave issues? one may set states more offten?
+  
+  Should tracks be in sent state
+    shoudl nevre change from player side
+    could get large [PO]
+    fulll state obj, = player state +  track state
+    track state album could be id [PO?]
+
+  Data types data types data types
+    state, tracks, messages
+    basically no idea what is best, smaller thinking quickly leads me to issues with too little info
+
+  redux style state + callback
+    kinda gets around diff / reconciling issues
+    really difficult sounding
+
+
+
+

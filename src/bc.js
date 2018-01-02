@@ -19,6 +19,7 @@ chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
 console.log("we're in");
 
 window.onload = () => {
+  console.log('dom loadeded');
   const buttons = bc.getPlayButtons();
   Array.from(buttons).forEach((button, index) => {
     const updatePlayingIndex = () => {
